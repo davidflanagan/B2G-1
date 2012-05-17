@@ -5,7 +5,8 @@ REPO=./repo
 install_blobs() {
 	mkdir -p download-$1 &&
 	for BLOB in $2 ; do
-		curl https://dl.google.com/dl/android/aosp/$BLOB -o download-$1/$BLOB -z download-$1/$BLOB &&
+		curl https://dl.google.com/dl/android/aosp/$BLOB -o download-$1/$BLOB.partial -z download-$1/$BLOB &&
+                mv download-$1/$BLOB.partial download-$1/$BLOB &&
 		tar xvfz download-$1/$BLOB -C download-$1
 	done &&
 	for BLOB_SH in download-$1/extract-*.sh ; do
